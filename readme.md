@@ -181,9 +181,9 @@ Train a continual learning model for image captioning with different approaches.
   -bs BS                        Batch size to be used during training and evaluation.
   -f, --folder FOLDER           Model folder where to load/save weights and csv files.
   -a, --approach {ft, ewc, lwf, ratt, ratt_ablation}
-  -t, --task TASK       Continue training the model from the selected task.
-  -e, --epoch EPOCH     Continue training the model from the selected epoch, loading weights from previous one.If epoch 1 is chosen, best epoch of the previous task will be loaded.
-  -l, --load LOAD       Load the best model weights from the first task of selected model/folder
+  -t, --task TASK               Continue training the model from the selected task.
+  -e, --epoch EPOCH             Continue training the model from the selected epoch, loading weights from previous one.If epoch 1 is chosen, best epoch of the previous task will be loaded.
+  -l, --load LOAD               Load the best model weights from the first task of selected model/folder
   --hidden-size HIDDEN_SIZE     Number of neurons in LSTM hidden layer (hidden-state size)
   -emb-size EMB_SIZE            Number of neurons in image and word embedding layers (LSTM input size)
   -mdl, --max-decode-len MDL    Max decoding lenght for sampling (evaluation)
