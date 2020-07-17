@@ -1,7 +1,7 @@
 # RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning
 This repo contains the original code used for the experiments of 
-"RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning" paper,
-and can be used to replicate the results.
+[RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning](https://openreview.net/forum?id=DlhyudbShm)
+paper, and can be used to replicate the results.
 
 
 ## Abstract
