@@ -1,7 +1,8 @@
 # RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning
-This repo contains the original code used for the experiments of 
-[RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning](https://openreview.net/forum?id=DlhyudbShm)
-paper, and can be used to replicate the results.
+This repo contains the original code used for the experiments of RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning paper, and can be used to replicate the results.
+
+This work was accepted to ICML 2020 LifelongML Workshop ([RATT - ICML 2020 LifelongML version](https://openreview.net/forum?id=DlhyudbShm))
+and has been recently accepted on NeurIPS 2020.
 
 ![RATT schema](https://github.com/delchiaro/ratt/blob/master/RATT-thumbnail.png?raw=true)
 
