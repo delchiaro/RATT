@@ -3,6 +3,7 @@ This repo contains the original code used for the experiments of
 [RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning](https://openreview.net/forum?id=DlhyudbShm)
 paper, and can be used to replicate the results.
 
+![RATT schema](https://github.com/delchiaro/ratt/blob/master/RATT-thumbnail.png?raw=true)
 
 ## Abstract
 >Research on continual learning has led to a variety of approaches to
@@ -20,6 +21,8 @@ approaches to incremental image captioning problem on two new continual
 learning benchmarks we define using the MS-COCO and Flickr30 datasets. Our
 results demonstrate that RATT is able to sequentially learn five captioning
 tasks while incurring *no* forgetting of previously learned ones.
+
+
 
 ## Dependencies
 This is the list of python requirements:
