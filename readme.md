@@ -22,6 +22,15 @@ learning benchmarks we define using the MS-COCO and Flickr30 datasets. Our
 results demonstrate that RATT is able to sequentially learn five captioning
 tasks while incurring *no* forgetting of previously learned ones.
 
+## Results
+Results and comparisons on MS-COCO:
+![performances for MS-COCO dataset](https://github.com/delchiaro/ratt/blob/master/RATT-table-results-MSCOCO.png?raw=true)
+
+Results and comparisons on Flickr30k:
+![performances for Flickr30k dataset](https://github.com/delchiaro/ratt/blob/master/RATT-table-results-Flickr30k.png?raw=true)
+
+Numbers are the per-task performance after training on the last task.
+Per-task forgetting in the last row is the BLEU-4 performance after the last task divided by the BLEU-4 performance measured immediately after learning each task.
 
 
 ## Dependencies
