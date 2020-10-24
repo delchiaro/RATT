@@ -146,10 +146,10 @@ To evaluate on MS-COCO-TASFI test-set:
 #### Flickr30k Experiments
 To train the models on Flickr30K with the proposed SAVI split:
 ```bash
-    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra_epochs 20 -mdl 40 -f flickr_ft 
-    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra_epochs 20 -mdl 40 -f flickr_ewc -a ewc --ewc-sampling multinomial --ewc-lambda 20
-    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra_epochs 20 -mdl 40 -f flickr_lwf -a lwf --lwf-T 1
-    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra_epochs 20 -mdl 40 -f flickr_ratt -a ratt --ratt-usage 60 --ratt-smax 400
+    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra-epochs 20 -mdl 40 -f flickr_ft 
+    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra-epochs 20 -mdl 40 -f flickr_ewc -a ewc --ewc-sampling multinomial --ewc-lambda 20
+    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra-epochs 20 -mdl 40 -f flickr_lwf -a lwf --lwf-T 1
+    python train.py --gpu 0 --seed 42 -j flickr30k-SAVI -lr 1e-4 -bs 32 --nb-epochs 50 --extra-epochs 20 -mdl 40 -f flickr_ratt -a ratt --ratt-usage 60 --ratt-smax 400
 ```
 
 Finally, to evaluate the trained models on Flickr30K-SAVI test set:    
