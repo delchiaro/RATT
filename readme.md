@@ -1,8 +1,13 @@
 # RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning
 This repo contains the original code used for the experiments of RATT: Recurrent Attention to Transient Tasks for Continual Image Captioning paper, and can be used to replicate the results.
 
-This work was accepted to ICML 2020 LifelongML Workshop ([RATT - ICML 2020 LifelongML version](https://openreview.net/forum?id=DlhyudbShm))
-and has been recently accepted on NeurIPS 2020.
+This work was accepted on ICML 2020 LifelongML Workshop and has been recently accepted on NeurIPS 2020.
+
+Links:
+* [RATT ICML 2020 LifelongML paper](https://openreview.net/forum?id=DlhyudbShm)
+* [RATT NeurIPS pre-print paper](https://arxiv.org/abs/2007.06271)
+* [RATT NeurIPS spotlight presentation](https://github.com/delchiaro/RATT/releases/download/spotlight/RATT_NeurIPS_spotlight_presentation.pdf)
+
 
 ![RATT schema](https://github.com/delchiaro/ratt/blob/master/RATT-thumbnail.png?raw=true)
 
@@ -270,3 +275,32 @@ You should use the flag ```--resized-path``` on ```coco_feats.py``` if you want 
  the images already resized with ```coco_resize.py```. 
  
  
+## Pre-trained Models
+
+Pre-trained models can be downloaded from [releases in this repo](https://github.com/delchiaro/RATT/releases/tag/pre-trained-models).
+
+You can unzip each model folder in the ```models/``` directory in the root of the project:
+
+```
+RATT-master/models/<MODEL_NAME>/CONTENT-OF-ZIP-FOLDER
+```
+
+For each model and for each task we provide the weights at the best validation epoch (respect to belu-4 score) and at the last trained epoch.
+We also give a .info text file containing all the information related to the training parameters and hyperparameters.
+
+These files are needed to correctly execute evaluation over the test-set or to continue the training of a model.
+
+Csv files containing validation performances computed at the end of each training epoch are provided with each model.
+
+#### Trained on MS-COCO
+* [FT](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/coco_ft.zip)
+* [EWC](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/coco_ewc.zip)
+* [LwF](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/coco_lwf.zip)
+* [RATT](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/coco_ratt.zip)
+
+#### Trained on Flickr30k
+* [FT](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/flickr_ft.zip)
+* [EWC](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/flickr_ewc.zip)
+* [LwF](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/flickr_lwf.zip)
+* [RATT](https://github.com/delchiaro/RATT/releases/download/pre-trained-models/flickr_ratt.zip)
+
