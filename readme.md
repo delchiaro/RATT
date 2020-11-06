@@ -137,7 +137,7 @@ To train the models on MS-COCO with the proposed TASFI split:
     python train.py --gpu 0 --seed 42 -j coco-TASFI -ee 10 -mdl 26 -f coco_ft
     python train.py --gpu 0 --seed 42 -j coco-TASFI -ee 10 -mdl 26 -f coco_ewc -a ewc --ewc-sampling multinomial --ewc-lambda 10
     python train.py --gpu 0 --seed 42 -j coco-TASFI -ee 10 -mdl 26 -f coco_lwf -a lwf --lwf-T 1
-    python train.py --gpu 0 --seed 42 -j coco-TASFI -ee 10 -mdl 26 -f coco_ratt -a ratt --ratt-usage 60 --ratt-smax 400 --seed 42 --gpu 0    
+    python train.py --gpu 0 --seed 42 -j coco-TASFI -ee 10 -mdl 26 -f coco_ratt -a ratt --ratt-usage 60 --ratt-smax 400
 
 ```
 
