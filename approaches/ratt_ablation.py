@@ -17,16 +17,16 @@ from CNIC.vocab import Vocabulary
 from approaches.ratt import HATMask
 
 
-class DecoderLSTMCellHATAblation(DecoderLSTMCell):
-    def __init__(self, visual_feat_size, embed_size, hidden_size, vocab: Vocabulary, nb_tasks, default_hat_s, max_decode_length=20, hat_usage=.5,
+class DecoderLSTMCellRATTAblation(DecoderLSTMCell):
+    def __init__(self, visual_feat_size, embed_size, hidden_size, vocab: Vocabulary, nb_tasks, default_s, max_decode_length=20, hat_usage=.5,
                  remove_hat_emb=False):
         """Set the hyper-parameters and build the layers."""
-        super(DecoderLSTMCellHATAblation, self).__init__(visual_feat_size, embed_size, hidden_size, vocab, max_decode_length)
-        self.hat_mask_emb = HATMask(nb_tasks, embed_size, default_hat_s, hat_usage) if not remove_hat_emb else None
-        self.hat_mask_lstm = HATMask(nb_tasks, hidden_size, default_hat_s, hat_usage)
+        super(DecoderLSTMCellRATTAblation, self).__init__(visual_feat_size, embed_size, hidden_size, vocab, max_decode_length)
+        self.hat_mask_emb = HATMask(nb_tasks, embed_size, default_s, hat_usage) if not remove_hat_emb else None
+        self.hat_mask_lstm = HATMask(nb_tasks, hidden_size, default_s, hat_usage)
         # self.hat_mask_cls = HATMask(nb_tasks, len(vocab), default_hat_s)
         self.nb_tasks = nb_tasks
-        self._default_hat_s = default_hat_s
+        self._default_s = default_s
         self._t = 0
         self._s = 1
         self._hat_emb = not remove_hat_emb
@@ -78,7 +78,7 @@ class DecoderLSTMCellHATAblation(DecoderLSTMCell):
 
         return None
 
-    def init_hat_forward(self, t, s, hat_emb, sample_binarize=False):
+    def init_ratt_forward(self, t, s, hat_emb, sample_binarize=False):
         self._t = torch.tensor(t, device=self.linear.weight.device)
         self._s = s
         self._hat_emb = hat_emb
@@ -124,7 +124,7 @@ class DecoderLSTMCellHATAblation(DecoderLSTMCell):
     def sample(self, features, states=None, map_words=None,  max_seq_len=None):
         """Generate captions for given image features using greedy search."""
 
-        s = self._default_hat_s
+        s = self._default_s
         # HAT
         h_mask = self.hat_mask_lstm.forward(self._t, s, self._sample_binarize)
         emb_mask = self.hat_mask_emb.forward(self._t, s, self._sample_binarize) if self._hat_emb else None
@@ -160,7 +160,7 @@ class DecoderLSTMCellHATAblation(DecoderLSTMCell):
 
 
 
-class ApproachHATAblation(Approach):
+class ApproachRATTAblation(Approach):
     @dataclass
     class Settings(Approach.Settings):
         lambd: float = 5000
@@ -172,12 +172,12 @@ class ApproachHATAblation(Approach):
         ratt_cls: bool=False
         ratt_emb: bool=False
 
-    def __init__(self, encoder_cnn: EncoderCNN, decoder: DecoderLSTMCellHATAblation,
+    def __init__(self, encoder_cnn: EncoderCNN, decoder: DecoderLSTMCellRATTAblation,
                  settings: Settings = Settings(), device=None):
-        assert isinstance(decoder, DecoderLSTMCellHATAblation)
+        assert isinstance(decoder, DecoderLSTMCellRATTAblation)
         super().__init__(encoder_cnn, decoder, settings, device)
-        self.decoder: DecoderLSTMCellHATAblation = decoder
-        self.settings: ApproachHATAblation.Settings = settings
+        self.decoder: DecoderLSTMCellRATTAblation = decoder
+        self.settings: ApproachRATTAblation.Settings = settings
         self.old_encoder_cnn = None
         self.old_encoder_shallow = None
         self.old_decoder = None
@@ -208,7 +208,7 @@ class ApproachHATAblation(Approach):
 
             # Activations mask for previous task t-1
             task = torch.tensor([t-1], dtype=torch.long).to(self.decoder.linear.weight.device)
-            self.decoder: DecoderLSTMCellHATAblation
+            self.decoder: DecoderLSTMCellRATTAblation
             emb_mask=None
             if self.settings.ratt_emb:
                 emb_mask = self.decoder.hat_mask_emb.forward(task, self.settings.smax)
@@ -259,7 +259,7 @@ class ApproachHATAblation(Approach):
 
         # Forward
         features = self._encode(images)
-        self.decoder.init_hat_forward(t, s, self.settings.ratt_emb)
+        self.decoder.init_ratt_forward(t, s, self.settings.ratt_emb)
         logits, _, _, (emb_mask, h_mask) = self.decoder.forward(features, targets, lengths, active_words)
         #c_mask = self._get_c_mask(active_words)
 
@@ -361,6 +361,6 @@ class ApproachHATAblation(Approach):
         return self.settings.lambd * (numerator / denominator)
 
     def evaluate(self, t, job: Job, data_loader, sampling=True):
-        self.decoder.init_hat_forward(t, self.settings.smax, self.settings.ratt_emb, self.settings.binary_sample_forward_masks)
+        self.decoder.init_ratt_forward(t, self.settings.smax, self.settings.ratt_emb, self.settings.binary_sample_forward_masks)
         return super().evaluate(t, job, data_loader, sampling)
 

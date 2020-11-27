@@ -195,8 +195,8 @@ def plot_heatmap(experiment: Experiment, fname=None,
 
 # ALL_RESULTS_DIR = './models/all_csvs/'
 ALL_RESULTS_DIR = './models/'
-HAT_ABLATION_RESULTS_DIR = './models/all_hat_ablation_csv/'
-SMAX_ABLATION_RESULTS_DIR = './models_hat_smax_ablation_origparams/'
+RATT_ABLATION_RESULTS_DIR = './models/all_ratt_ablation_csv/'
+SMAX_ABLATION_RESULTS_DIR = './models_ratt_smax_ablation_origparams/'
 
 METRICS = ['BLEU-1', 'BLEU-2', 'BLEU-3', 'BLEU-4', 'METEOR', 'ROUGE_L', 'CIDEr', ]
 METRICS = ['BLEU-4', 'METEOR', 'ROUGE_L', 'CIDEr', ]
@@ -212,13 +212,13 @@ exp_flickr_comparison = Experiment(FLICKR, ALL_RESULTS_DIR,
                                    {'FT': 'flickr30k-SAVI_bs32_lr1e-4_ft',
                                     'EWC': 'flickr30k-SAVI_bs32_lr1e-4_ewc_multi_l20',
                                     'LwF': 'flickr30k-SAVI_bs32_lr1e-4_lwf_T1_l2',
-                                    'RATT': 'flickr30k-SAVI_bs32_lr1e-4_hat_u60_s2000_l5'},
+                                    'RATT': 'flickr30k-SAVI_bs32_lr1e-4_ratt_u60_s2000_l5'},
                                     metrics=['BLEU-4']).read_files()
 exp_coco_comparison = Experiment(COCO, ALL_RESULTS_DIR,
                                    {'FT': 'coco_tasfi_ft',
                                     'EWC': 'coco_tasfi_ewc_multi_10',
                                     'LwF': 'coco_tasfi_lwf_T1',
-                                    'RATT': 'coco_tasfi_hat_60_400'},
+                                    'RATT': 'coco_tasfi_ratt_60_400'},
                                     metrics=['BLEU-4']).read_files()
 
 epoch_plot(exp_flickr_comparison, 'plots/flickr_comparison_epochs', left=0.06, right=.9, bottom=.2)
@@ -239,17 +239,17 @@ plot_heatmap(exp_coco_comparison, 'plots/coco_comparison_heatmaps',
 
 #%% RATT ABLATIONS PLOTS
 
-exp_mscoco_hat_ablation = Experiment(COCO, HAT_ABLATION_RESULTS_DIR,
-                                     {'FT': '1_coco_tasfi_ft',
+exp_mscoco_ratt_ablation = Experiment(COCO, RATT_ABLATION_RESULTS_DIR,
+                                      {'FT': '1_coco_tasfi_ft',
                                       'LSTM': '2_coco_tasfi_hatabl',
                                       'LSTM+CLS': '3_coco_tasfi_hatabl_cls',
                                       'LSTM+EMB': '4_coco_tasfi_hatabl_emb',
-                                      'RATT': '5_coco_tasfi_hat_60_40'},
-                                     metrics=['BLEU-4']).read_files()
+                                      'RATT': '5_coco_tasfi_ratt_60_40'},
+                                      metrics=['BLEU-4']).read_files()
 #%%
-epoch_plot(exp_mscoco_hat_ablation, 'plots/coco_ratt_ablation_epochs', left=0.04, right=.88, bottom=.15)
+epoch_plot(exp_mscoco_ratt_ablation, 'plots/coco_ratt_ablation_epochs', left=0.04, right=.88, bottom=.15)
 #%%
-plot_heatmap(exp_mscoco_hat_ablation, 'plots/coco_ratt_ablation_heatmaps',
+plot_heatmap(exp_mscoco_ratt_ablation, 'plots/coco_ratt_ablation_heatmaps',
              top=0.9, bottom=0.2, left=0.05, right=.98,
              cmap=True, vmin=0, vmax=.32, val_mul=100,
              annot=True, annot_fmt='.1f', annot_size=11, font_scale=1.3, dpi=300., wspace=0.1)

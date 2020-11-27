@@ -9,7 +9,7 @@ from CNIC.model import EncoderCNN, DecoderLSTMCell
 from CNIC.task import JobFactory
 from approaches.ewc import ApproachEWC
 from approaches.ratt import ApproachRATT, DecoderLSTMCellRATT
-from approaches.ratt_ablation import ApproachHATAblation, DecoderLSTMCellHATAblation
+from approaches.ratt_ablation import ApproachRATTAblation, DecoderLSTMCellRATTAblation
 from approaches.lwf30 import ApproachLwF_3
 import jobs
 
@@ -241,17 +241,17 @@ def init_approach(args, job, cnn_feats_size, device):
     elif args.approach == 'ratt_ablation':
         args.ratt_usage = int(args.ratt_usage * 100) if (
                     isinstance(args.ratt_usage, float) and args.ratt_usage <= 1.) else int(args.ratt_usage)
-        settings = ApproachHATAblation.Settings(dargs, args.lr, args.wd, args.nb_epochs, args.extra_epochs,
-                                                args.freeze_old_words,
-                                                lambd=args.ratt_lambda, smax=args.ratt_smax,
-                                                thres_cosh=args.ratt_thres_cosh,
-                                                usage=args.ratt_usage,
-                                                binary_backward_masks=args.ratt_bin_backward,
-                                                binary_sample_forward_masks=args.ratt_bin_forward,
-                                                ratt_cls=args.ratt_cls, ratt_emb=args.ratt_emb)
-        decoder = DecoderLSTMCellHATAblation(cnn_feats_size, args.embed_size, args.hidden_size, job.full_vocab, len(job.tasks),
-                                     args.ratt_smax, args.max_decode_len, args.ratt_usage / 100.)
-        appr = ApproachHATAblation(encoder_cnn, decoder, settings, device)
+        settings = ApproachRATTAblation.Settings(dargs, args.lr, args.wd, args.nb_epochs, args.extra_epochs,
+                                                 args.freeze_old_words,
+                                                 lambd=args.ratt_lambda, smax=args.ratt_smax,
+                                                 thres_cosh=args.ratt_thres_cosh,
+                                                 usage=args.ratt_usage,
+                                                 binary_backward_masks=args.ratt_bin_backward,
+                                                 binary_sample_forward_masks=args.ratt_bin_forward,
+                                                 ratt_cls=args.ratt_cls, ratt_emb=args.ratt_emb)
+        decoder = DecoderLSTMCellRATTAblation(cnn_feats_size, args.embed_size, args.hidden_size, job.full_vocab, len(job.tasks),
+                                              args.ratt_smax, args.max_decode_len, args.ratt_usage / 100.)
+        appr = ApproachRATTAblation(encoder_cnn, decoder, settings, device)
 
     else:
         raise ValueError()
