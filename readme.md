@@ -5,7 +5,7 @@ This work was accepted on ICML 2020 LifelongML Workshop and has been recently ac
 
 Links:
 * [RATT ICML 2020 LifelongML paper](https://openreview.net/forum?id=DlhyudbShm)
-* [RATT NeurIPS pre-print paper](https://arxiv.org/abs/2007.06271)
+* [RATT NeurIPS 2020 paper](https://proceedings.neurips.cc/paper/2020/hash/c2964caac096f26db222cb325aa267cb-Abstract.html)
 * [RATT NeurIPS spotlight presentation](https://github.com/delchiaro/RATT/releases/download/spotlight/RATT_NeurIPS_spotlight_presentation.pdf)
 
 
